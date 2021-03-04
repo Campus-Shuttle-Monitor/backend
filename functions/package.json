@@ -1,0 +1,15 @@
+{
+  "name": "functions",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "test": "mocha test/*.test.js --timeout=60000"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "node": "^15.10.0"
+  }
+}
