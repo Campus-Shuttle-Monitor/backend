@@ -22,3 +22,72 @@ exports.helloHttp = (req, res) => {
             break;
     }
 };
+
+class coordBuffer {
+    #privateBuffer
+
+
+    constructor(size) {
+        this.size = size;
+        this.#privateBuffer = {};
+    }
+
+    /**
+     * @param {number | object} id
+     */
+    set addCoord(id, coordData) {
+        if( this.#privateBuffer[id] ) {
+            this.#privateBuffer[id].append(coordData);
+        } else {
+            this.#privateBuffer[id] = [coordData];
+        }
+        this.checkSize(id);
+    }
+
+    get lastCoord(id) {
+        if( this.#privateBuffer[id] ) {
+            return this.#privateBuffer[id].slice(-1)[0];
+        } else {
+            return 0;
+        }
+    }
+
+    checkSize(id) {
+        if( this.#privateBuffer[id].size > this.size ) {
+            let half = Math.ceil(this.#privateBuffer[id].size / 2);
+            this.#privateBuffer[id].splice(0, half);
+        }
+    }
+
+}
+
+exports.shuttleCoord = (req, res) => {
+    static let buffer = new coordBuffer(100);
+    let coordData = {};
+    let data = '';
+    // TODO - verify authenticity of sender
+    switch (req.method) {
+        case 'GET':
+            coordData = buffer.lastCoord();
+            if( coordData == 0 ) {
+                res.status(503).send('Location data not available')
+            }
+            else {
+                res.status(200).send(`Last seen shuttle location ${coordData}`);
+            }
+            break;
+        case 'POST':
+            req.on('data', chunk => {
+                data += chunk;
+            });
+            req.on('end', () => {
+                coordData = JSON.parse(data);
+            });
+            buffer.addCoord(coordData);
+            res.status(200).send('Success!');
+            break;
+        default:
+            res.status(405).send({error: 'Something blew up!'});
+            break;
+    }
+};
