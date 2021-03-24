@@ -21,7 +21,6 @@ paths:
           description: "Forbidden!"
         405:
           description: "Internal error!"
-paths:
   "/shuttleCoord":
     get:
       operationId: "shuttleCoord"
