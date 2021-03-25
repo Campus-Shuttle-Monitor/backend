@@ -61,8 +61,12 @@ class coordBuffer {
 
 }
 
+let buffer = new coordBuffer(100);
+/**
+ * @param req {e.Request}
+ * @param res {e.Response}
+ */
 exports.shuttleCoord = (req, res) => {
-    static let buffer = new coordBuffer(100);
     let coordData = {};
     let data = '';
     // TODO - verify authenticity of sender
