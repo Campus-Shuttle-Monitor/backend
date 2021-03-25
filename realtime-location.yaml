@@ -6,18 +6,24 @@ info:
 schemes:
   - https
 paths:
-  "/helloHttp":
+  "/shuttleCoord/{id}":
     get:
-      operationId: "helloHttp"
+      operationId: "shuttleCoordGet"
       x-google-backend:
-        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/helloHttp
-      description: "A short message with a random number."
+        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
+        path_translation: CONSTANT_ADDRESS
+      description: "Get most recent coordinate data."
       responses:
         200:
           description: "Success."
           schema:
-            type: string
-        403:
-          description: "Forbidden!"
-        405:
-          description: "Internal error!"
+            type: object
+    post:
+      operationId: "shuttleCoordPost"
+      x-google-backend:
+        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
+        path_translation: CONSTANT_ADDRESS
+      description: "Post new coordinate data."
+      responses:
+        200:
+          description: "Success."
