@@ -6,21 +6,6 @@ info:
 schemes:
   - https
 paths:
-  "/helloHttp":
-    get:
-      operationId: "helloHttp"
-      x-google-backend:
-        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/helloHttp
-      description: "A short message with a random number."
-      responses:
-        200:
-          description: "Success."
-          schema:
-            type: string
-        403:
-          description: "Forbidden!"
-        405:
-          description: "Internal error!"
   "/shuttleCoord/{id}":
     get:
       operationId: "shuttleCoordGet"

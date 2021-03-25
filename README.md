@@ -17,7 +17,7 @@ Functions are snippets of code that run in response to HTTP(S) queries.
 To deploy a new Function, run this command:
 
 ```shell
-gcloud functions deploy helloHttp --runtime nodejs14 --trigger-http --project campus-shuttle-monitor
+gcloud functions deploy shuttleCoord --runtime nodejs14 --trigger-http --project campus-shuttle-monitor
 ```
 
 ## Troubleshooting
