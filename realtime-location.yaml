@@ -6,11 +6,16 @@ info:
 schemes:
   - https
 paths:
-  "/shuttleCoord/{id}":
+  "/shuttle/{id}":
     get:
-      operationId: "shuttleCoordGet"
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+      operationId: "shuttleGet"
       x-google-backend:
-        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
+        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttle
         path_translation: CONSTANT_ADDRESS
       description: "Get most recent coordinate data."
       responses:
@@ -19,9 +24,14 @@ paths:
           schema:
             type: object
     post:
-      operationId: "shuttleCoordPost"
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+      operationId: "shuttlePost"
       x-google-backend:
-        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
+        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttle
         path_translation: CONSTANT_ADDRESS
       description: "Post new coordinate data."
       responses:

@@ -14,10 +14,10 @@ gcloud api-gateway api-configs create realtime-locations --project campus-shuttl
 
 Functions are snippets of code that run in response to HTTP(S) queries.
 
-To deploy a new Function, run this command:
+To deploy a new Function, ensure you are in the `functions` module and run this command:
 
 ```shell
-gcloud functions deploy shuttleCoord --runtime nodejs14 --trigger-http --project campus-shuttle-monitor
+gcloud functions deploy shuttle --runtime nodejs14 --trigger-http --project campus-shuttle-monitor
 ```
 
 ## Troubleshooting

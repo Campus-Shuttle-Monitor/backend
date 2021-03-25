@@ -15,15 +15,15 @@ let coords = {};
  * @param req {e.Request}
  * @param res {e.Response}
  */
-exports.shuttleCoord = (req, res) => {
+exports.shuttle = (req, res) => {
     // TODO - verify authenticity of sender: https://cloud.google.com/api-gateway/docs/quickstart-console#securing_access_by_using_an_api_key
     const {id} = req.query;
     switch (req.method) {
         case 'GET':
-            getShuttleCoord(req, res, id);
+            getShuttle(req, res, id);
             break;
         case 'POST':
-            postShuttleCoord(req, res, id);
+            postShuttle(req, res, id);
             break;
         default:
             res.status(405).send({error: 'Something blew up!'});
@@ -36,7 +36,7 @@ exports.shuttleCoord = (req, res) => {
  * @param res {e.Response}
  * @param id {number}
  */
-function getShuttleCoord(req, res, id) {
+function getShuttle(req, res, id) {
     let coordData = coords[id];
     if (coordData) {
         res.status(200).send(`Last seen shuttle location ${coordData.latitude}, ${coordData.longitude}`);
@@ -50,7 +50,7 @@ function getShuttleCoord(req, res, id) {
  * @param res {e.Response}
  * @param id {number}
  */
-function postShuttleCoord(req, res, id) {
+function postShuttle(req, res, id) {
     coords[id] = req.body;
     res.status(200).send('Success!');
 }
