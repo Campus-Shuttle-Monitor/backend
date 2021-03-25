@@ -21,18 +21,24 @@ paths:
           description: "Forbidden!"
         405:
           description: "Internal error!"
-  "/shuttleCoord":
+  "/shuttleCoord/{id}":
     get:
-      operationId: "shuttleCoord"
+      operationId: "shuttleCoordGet"
       x-google-backend:
         address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
-      description: "Get or post coordinate data."
+        path_translation: CONSTANT_ADDRESS
+      description: "Get most recent coordinate data."
       responses:
         200:
           description: "Success."
           schema:
             type: object
-        403:
-          description: "Forbidden!"
-        405:
-          description: "Internal error!"
+    post:
+      operationId: "shuttleCoordPost"
+      x-google-backend:
+        address: https://us-central1-campus-shuttle-monitor.cloudfunctions.net/shuttleCoord
+        path_translation: CONSTANT_ADDRESS
+      description: "Post new coordinate data."
+      responses:
+        200:
+          description: "Success."
