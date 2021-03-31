@@ -39,7 +39,7 @@ exports.shuttle = (req, res) => {
 function getShuttle(req, res, id) {
     let coordData = coords[id];
     if (coordData) {
-        res.status(200).send(`Last seen shuttle location ${coordData.latitude}, ${coordData.longitude}`);
+        res.status(200).send({latitude: coordData.latitude, longitude: coordData.longitude});
     } else {
         res.status(503).send('Location data not available');
     }
