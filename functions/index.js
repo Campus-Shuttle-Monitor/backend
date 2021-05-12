@@ -39,9 +39,16 @@ exports.shuttle = (req, res) => {
 function getShuttle(req, res, id) {
     let coordData = coords[id];
     if (coordData) {
-        res.status(200).send({latitude: coordData.latitude, longitude: coordData.longitude});
+        res.status(200)
+            .header("Access-Control-Allow-Origin", "*")
+            .send({
+                latitude: coordData.latitude,
+                longitude: coordData.longitude
+            });
     } else {
-        res.status(503).send('Location data not available');
+        res.status(503)
+            .header("Access-Control-Allow-Origin", "*")
+            .send('Location data not available');
     }
 }
 
@@ -52,5 +59,7 @@ function getShuttle(req, res, id) {
  */
 function postShuttle(req, res, id) {
     coords[id] = req.body;
-    res.status(200).send('Success!');
+    res.status(200)
+        .header("Access-Control-Allow-Origin", "*")
+        .send('Success!');
 }
